@@ -1,0 +1,3 @@
+D:\VS Project\cjt_compiler\simplecomplier\x64\Debug\simplecomplier.exe
+C:\Users\19140\Documents\Tencent Files\1914001753\FileRecv\simplecomplier\x64\Debug\simplecomplier.exe
+C:\Users\19140\Desktop\simplecomplier\x64\Debug\simplecomplier.exe
