@@ -10,57 +10,57 @@ lexer:;  action:r21  production:INVARDEF -> INT ID
 lexer:i  action:r20  production:INASSERTION -> none
 lexer:i  action:r19  production:INASSERTION -> INVARDEF ; INASSERTION
 lexer:i  action:r19  production:INASSERTION -> INVARDEF ; INASSERTION
-lexer: ;  action:r52  production:FACTOR -> NUM
-lexer: ;  action:r50  production:TERM -> FACTOR
-lexer: ;  action:r48  production:PLUSEX -> TERM
+lexer: ;  action:r59  production:FACTOR -> NUM
+lexer: ;  action:r56  production:TERM -> FACTOR
+lexer: ;  action:r53  production:PLUSEX -> TERM
 lexer: ;  action:r46  production:COMP -> PLUSEX
 lexer: ;  action:r44  production:BNOT -> COMP
 lexer: ;  action:r42  production:BAND -> BNOT
 lexer: ;  action:r40  production:EXPRESSION -> BAND
 lexer: ;  action:r29  production:ASSIGNMENT -> ID ASSIGN EXPRESSION
 lexer:if  action:r28  production:SENTENCE -> ASSIGNMENT ;
-lexer:>  action:r54  production:FACTOR -> ID
-lexer:>  action:r50  production:TERM -> FACTOR
-lexer:>  action:r48  production:PLUSEX -> TERM
-lexer:+  action:r54  production:FACTOR -> ID
-lexer:+  action:r50  production:TERM -> FACTOR
-lexer:)  action:r54  production:FACTOR -> ID
-lexer:)  action:r50  production:TERM -> FACTOR
-lexer:)  action:r48  production:PLUSEX -> TERM
-lexer:)  action:r49  production:PLUSEX -> TERM OP1 PLUSEX
+lexer:>  action:r61  production:FACTOR -> ID
+lexer:>  action:r56  production:TERM -> FACTOR
+lexer:>  action:r53  production:PLUSEX -> TERM
+lexer:+  action:r61  production:FACTOR -> ID
+lexer:+  action:r56  production:TERM -> FACTOR
+lexer:)  action:r61  production:FACTOR -> ID
+lexer:)  action:r56  production:TERM -> FACTOR
+lexer:)  action:r53  production:PLUSEX -> TERM
+lexer:)  action:r54  production:PLUSEX -> TERM + PLUSEX
 lexer:)  action:r46  production:COMP -> PLUSEX
 lexer:)  action:r44  production:BNOT -> COMP
 lexer:)  action:r42  production:BAND -> BNOT
 lexer:)  action:r40  production:EXPRESSION -> BAND
-lexer:)  action:r53  production:FACTOR -> ( EXPRESSION )
-lexer:)  action:r50  production:TERM -> FACTOR
-lexer:)  action:r48  production:PLUSEX -> TERM
+lexer:)  action:r60  production:FACTOR -> ( EXPRESSION )
+lexer:)  action:r56  production:TERM -> FACTOR
+lexer:)  action:r53  production:PLUSEX -> TERM
 lexer:)  action:r46  production:COMP -> PLUSEX
-lexer:)  action:r47  production:COMP -> PLUSEX CMP COMP
+lexer:)  action:r51  production:COMP -> PLUSEX > COMP
 lexer:)  action:r44  production:BNOT -> COMP
 lexer:)  action:r42  production:BAND -> BNOT
 lexer:)  action:r40  production:EXPRESSION -> BAND
 lexer:)  action:r37  production:CTRL -> EXPRESSION
 lexer:{  action:r38  production:T -> none
 lexer:j  action:r20  production:INASSERTION -> none
-lexer:+  action:r54  production:FACTOR -> ID
-lexer:+  action:r50  production:TERM -> FACTOR
-lexer:*  action:r54  production:FACTOR -> ID
-lexer:+  action:r54  production:FACTOR -> ID
-lexer:+  action:r50  production:TERM -> FACTOR
-lexer:+  action:r51  production:TERM -> FACTOR OP2 TERM
-lexer: )  action:r52  production:FACTOR -> NUM
-lexer: )  action:r50  production:TERM -> FACTOR
-lexer: )  action:r48  production:PLUSEX -> TERM
-lexer: )  action:r49  production:PLUSEX -> TERM OP1 PLUSEX
+lexer:+  action:r61  production:FACTOR -> ID
+lexer:+  action:r56  production:TERM -> FACTOR
+lexer:*  action:r61  production:FACTOR -> ID
+lexer:+  action:r61  production:FACTOR -> ID
+lexer:+  action:r56  production:TERM -> FACTOR
+lexer:+  action:r57  production:TERM -> FACTOR * TERM
+lexer: )  action:r59  production:FACTOR -> NUM
+lexer: )  action:r56  production:TERM -> FACTOR
+lexer: )  action:r53  production:PLUSEX -> TERM
+lexer: )  action:r54  production:PLUSEX -> TERM + PLUSEX
 lexer: )  action:r46  production:COMP -> PLUSEX
 lexer: )  action:r44  production:BNOT -> COMP
 lexer: )  action:r42  production:BAND -> BNOT
 lexer: )  action:r40  production:EXPRESSION -> BAND
-lexer:;  action:r53  production:FACTOR -> ( EXPRESSION )
-lexer:;  action:r50  production:TERM -> FACTOR
-lexer:;  action:r48  production:PLUSEX -> TERM
-lexer:;  action:r49  production:PLUSEX -> TERM OP1 PLUSEX
+lexer:;  action:r60  production:FACTOR -> ( EXPRESSION )
+lexer:;  action:r56  production:TERM -> FACTOR
+lexer:;  action:r53  production:PLUSEX -> TERM
+lexer:;  action:r54  production:PLUSEX -> TERM + PLUSEX
 lexer:;  action:r46  production:COMP -> PLUSEX
 lexer:;  action:r44  production:BNOT -> COMP
 lexer:;  action:r42  production:BAND -> BNOT
@@ -71,9 +71,9 @@ lexer:}  action:r23  production:SENSEQ -> SENTENCE
 lexer:else  action:r18  production:SENBLOCK -> { INASSERTION SENSEQ }
 lexer:{  action:r39  production:N -> none
 lexer:j  action:r20  production:INASSERTION -> none
-lexer:;  action:r54  production:FACTOR -> ID
-lexer:;  action:r50  production:TERM -> FACTOR
-lexer:;  action:r48  production:PLUSEX -> TERM
+lexer:;  action:r61  production:FACTOR -> ID
+lexer:;  action:r56  production:TERM -> FACTOR
+lexer:;  action:r53  production:PLUSEX -> TERM
 lexer:;  action:r46  production:COMP -> PLUSEX
 lexer:;  action:r44  production:BNOT -> COMP
 lexer:;  action:r42  production:BAND -> BNOT
@@ -85,28 +85,28 @@ lexer:none  action:r18  production:SENBLOCK -> { INASSERTION SENSEQ }
 lexer:none  action:r36  production:IFSEN -> IF ( CTRL ) T SENBLOCK ELSE N SENBLOCK
 lexer:none  action:r25  production:SENTENCE -> IFSEN
 lexer:while  action:r34  production:B -> none
-lexer:<=  action:r54  production:FACTOR -> ID
-lexer:<=  action:r50  production:TERM -> FACTOR
-lexer:<=  action:r48  production:PLUSEX -> TERM
-lexer: )  action:r52  production:FACTOR -> NUM
-lexer: )  action:r50  production:TERM -> FACTOR
-lexer: )  action:r48  production:PLUSEX -> TERM
+lexer:<=  action:r61  production:FACTOR -> ID
+lexer:<=  action:r56  production:TERM -> FACTOR
+lexer:<=  action:r53  production:PLUSEX -> TERM
+lexer: )  action:r59  production:FACTOR -> NUM
+lexer: )  action:r56  production:TERM -> FACTOR
+lexer: )  action:r53  production:PLUSEX -> TERM
 lexer: )  action:r46  production:COMP -> PLUSEX
-lexer: )  action:r47  production:COMP -> PLUSEX CMP COMP
+lexer: )  action:r49  production:COMP -> PLUSEX <= COMP
 lexer: )  action:r44  production:BNOT -> COMP
 lexer: )  action:r42  production:BAND -> BNOT
 lexer: )  action:r40  production:EXPRESSION -> BAND
 lexer: )  action:r37  production:CTRL -> EXPRESSION
 lexer:{  action:r38  production:T -> none
 lexer:i  action:r20  production:INASSERTION -> none
-lexer:+  action:r54  production:FACTOR -> ID
-lexer:+  action:r50  production:TERM -> FACTOR
-lexer:*  action:r54  production:FACTOR -> ID
-lexer: ;  action:r52  production:FACTOR -> NUM
-lexer: ;  action:r50  production:TERM -> FACTOR
-lexer: ;  action:r51  production:TERM -> FACTOR OP2 TERM
-lexer: ;  action:r48  production:PLUSEX -> TERM
-lexer: ;  action:r49  production:PLUSEX -> TERM OP1 PLUSEX
+lexer:+  action:r61  production:FACTOR -> ID
+lexer:+  action:r56  production:TERM -> FACTOR
+lexer:*  action:r61  production:FACTOR -> ID
+lexer: ;  action:r59  production:FACTOR -> NUM
+lexer: ;  action:r56  production:TERM -> FACTOR
+lexer: ;  action:r57  production:TERM -> FACTOR * TERM
+lexer: ;  action:r53  production:PLUSEX -> TERM
+lexer: ;  action:r54  production:PLUSEX -> TERM + PLUSEX
 lexer: ;  action:r46  production:COMP -> PLUSEX
 lexer: ;  action:r44  production:BNOT -> COMP
 lexer: ;  action:r42  production:BAND -> BNOT
@@ -117,9 +117,9 @@ lexer:}  action:r23  production:SENSEQ -> SENTENCE
 lexer:return  action:r18  production:SENBLOCK -> { INASSERTION SENSEQ }
 lexer:return  action:r33  production:WHILESEN -> B WHILE ( CTRL ) T SENBLOCK
 lexer:return  action:r26  production:SENTENCE -> WHILESEN
-lexer:;  action:r54  production:FACTOR -> ID
-lexer:;  action:r50  production:TERM -> FACTOR
-lexer:;  action:r48  production:PLUSEX -> TERM
+lexer:;  action:r61  production:FACTOR -> ID
+lexer:;  action:r56  production:TERM -> FACTOR
+lexer:;  action:r53  production:PLUSEX -> TERM
 lexer:;  action:r46  production:COMP -> PLUSEX
 lexer:;  action:r44  production:BNOT -> COMP
 lexer:;  action:r42  production:BAND -> BNOT
@@ -139,23 +139,23 @@ lexer:{  action:r10  production:FUNC -> INT ID M ( PARAM )
 lexer:;  action:r21  production:INVARDEF -> INT ID
 lexer:b  action:r20  production:INASSERTION -> none
 lexer:b  action:r19  production:INASSERTION -> INVARDEF ; INASSERTION
-lexer:+  action:r54  production:FACTOR -> ID
-lexer:+  action:r50  production:TERM -> FACTOR
-lexer: ;  action:r52  production:FACTOR -> NUM
-lexer: ;  action:r50  production:TERM -> FACTOR
-lexer: ;  action:r48  production:PLUSEX -> TERM
-lexer: ;  action:r49  production:PLUSEX -> TERM OP1 PLUSEX
+lexer:+  action:r61  production:FACTOR -> ID
+lexer:+  action:r56  production:TERM -> FACTOR
+lexer: ;  action:r59  production:FACTOR -> NUM
+lexer: ;  action:r56  production:TERM -> FACTOR
+lexer: ;  action:r53  production:PLUSEX -> TERM
+lexer: ;  action:r54  production:PLUSEX -> TERM + PLUSEX
 lexer: ;  action:r46  production:COMP -> PLUSEX
 lexer: ;  action:r44  production:BNOT -> COMP
 lexer: ;  action:r42  production:BAND -> BNOT
 lexer: ;  action:r40  production:EXPRESSION -> BAND
 lexer: ;  action:r29  production:ASSIGNMENT -> ID ASSIGN EXPRESSION
 lexer:return  action:r28  production:SENTENCE -> ASSIGNMENT ;
-lexer:*  action:r54  production:FACTOR -> ID
-lexer: ;  action:r52  production:FACTOR -> NUM
-lexer: ;  action:r50  production:TERM -> FACTOR
-lexer: ;  action:r51  production:TERM -> FACTOR OP2 TERM
-lexer: ;  action:r48  production:PLUSEX -> TERM
+lexer:*  action:r61  production:FACTOR -> ID
+lexer: ;  action:r59  production:FACTOR -> NUM
+lexer: ;  action:r56  production:TERM -> FACTOR
+lexer: ;  action:r57  production:TERM -> FACTOR * TERM
+lexer: ;  action:r53  production:PLUSEX -> TERM
 lexer: ;  action:r46  production:COMP -> PLUSEX
 lexer: ;  action:r44  production:BNOT -> COMP
 lexer: ;  action:r42  production:BAND -> BNOT
@@ -169,94 +169,248 @@ lexer:void  action:r6  production:VAR -> FUNC SENBLOCK
 lexer:(  action:r2  production:M -> none
 lexer:)  action:r15  production:PARAM -> none
 lexer:{  action:r9  production:FUNC -> VOID ID M ( PARAM )
-lexer:;  action:r21  production:INVARDEF -> INT ID
-lexer:;  action:r21  production:INVARDEF -> INT ID
-lexer:;  action:r21  production:INVARDEF -> INT ID
-lexer:;  action:r21  production:INVARDEF -> INT ID
-lexer:;  action:r21  production:INVARDEF -> INT ID
-lexer:b  action:r20  production:INASSERTION -> none
-lexer:b  action:r19  production:INASSERTION -> INVARDEF ; INASSERTION
-lexer:b  action:r19  production:INASSERTION -> INVARDEF ; INASSERTION
-lexer:b  action:r19  production:INASSERTION -> INVARDEF ; INASSERTION
-lexer:b  action:r19  production:INASSERTION -> INVARDEF ; INASSERTION
-lexer:b  action:r19  production:INASSERTION -> INVARDEF ; INASSERTION
-lexer: ;  action:r52  production:FACTOR -> NUM
-lexer: ;  action:r50  production:TERM -> FACTOR
-lexer: ;  action:r48  production:PLUSEX -> TERM
+lexer:;  action:r11  production:ARRAYVAR -> [ NUM ]
+lexer:;  action:r12  production:ARRAYVAR -> [ NUM ] ARRAYVAR
+lexer:;  action:r22  production:INVARDEF -> INT ID ARRAYVAR
+lexer:a  action:r20  production:INASSERTION -> none
+lexer:a  action:r19  production:INASSERTION -> INVARDEF ; INASSERTION
+lexer: ]  action:r59  production:FACTOR -> NUM
+lexer: ]  action:r56  production:TERM -> FACTOR
+lexer: ]  action:r53  production:PLUSEX -> TERM
+lexer: ]  action:r46  production:COMP -> PLUSEX
+lexer: ]  action:r44  production:BNOT -> COMP
+lexer: ]  action:r42  production:BAND -> BNOT
+lexer: ]  action:r40  production:EXPRESSION -> BAND
+lexer:[  action:r66  production:ARRAY -> ID [ EXPRESSION ]
+lexer: ]  action:r59  production:FACTOR -> NUM
+lexer: ]  action:r56  production:TERM -> FACTOR
+lexer: ]  action:r53  production:PLUSEX -> TERM
+lexer: ]  action:r46  production:COMP -> PLUSEX
+lexer: ]  action:r44  production:BNOT -> COMP
+lexer: ]  action:r42  production:BAND -> BNOT
+lexer: ]  action:r40  production:EXPRESSION -> BAND
+lexer:=  action:r67  production:ARRAY -> ARRAY [ EXPRESSION ]
+lexer: ;  action:r59  production:FACTOR -> NUM
+lexer: ;  action:r56  production:TERM -> FACTOR
+lexer: ;  action:r53  production:PLUSEX -> TERM
 lexer: ;  action:r46  production:COMP -> PLUSEX
 lexer: ;  action:r44  production:BNOT -> COMP
 lexer: ;  action:r42  production:BAND -> BNOT
 lexer: ;  action:r40  production:EXPRESSION -> BAND
-lexer: ;  action:r29  production:ASSIGNMENT -> ID ASSIGN EXPRESSION
-lexer:c  action:r28  production:SENTENCE -> ASSIGNMENT ;
-lexer:+  action:r54  production:FACTOR -> ID
-lexer:+  action:r50  production:TERM -> FACTOR
-lexer: ;  action:r52  production:FACTOR -> NUM
-lexer: ;  action:r50  production:TERM -> FACTOR
-lexer: ;  action:r48  production:PLUSEX -> TERM
-lexer: ;  action:r49  production:PLUSEX -> TERM OP1 PLUSEX
+lexer: ;  action:r30  production:ASSIGNMENT -> ARRAY ASSIGN EXPRESSION
+lexer:a  action:r28  production:SENTENCE -> ASSIGNMENT ;
+lexer: ]  action:r59  production:FACTOR -> NUM
+lexer: ]  action:r56  production:TERM -> FACTOR
+lexer: ]  action:r53  production:PLUSEX -> TERM
+lexer: ]  action:r46  production:COMP -> PLUSEX
+lexer: ]  action:r44  production:BNOT -> COMP
+lexer: ]  action:r42  production:BAND -> BNOT
+lexer: ]  action:r40  production:EXPRESSION -> BAND
+lexer:[  action:r66  production:ARRAY -> ID [ EXPRESSION ]
+lexer: ]  action:r59  production:FACTOR -> NUM
+lexer: ]  action:r56  production:TERM -> FACTOR
+lexer: ]  action:r53  production:PLUSEX -> TERM
+lexer: ]  action:r46  production:COMP -> PLUSEX
+lexer: ]  action:r44  production:BNOT -> COMP
+lexer: ]  action:r42  production:BAND -> BNOT
+lexer: ]  action:r40  production:EXPRESSION -> BAND
+lexer:=  action:r67  production:ARRAY -> ARRAY [ EXPRESSION ]
+lexer: ]  action:r59  production:FACTOR -> NUM
+lexer: ]  action:r56  production:TERM -> FACTOR
+lexer: ]  action:r53  production:PLUSEX -> TERM
+lexer: ]  action:r46  production:COMP -> PLUSEX
+lexer: ]  action:r44  production:BNOT -> COMP
+lexer: ]  action:r42  production:BAND -> BNOT
+lexer: ]  action:r40  production:EXPRESSION -> BAND
+lexer:[  action:r66  production:ARRAY -> ID [ EXPRESSION ]
+lexer: ]  action:r59  production:FACTOR -> NUM
+lexer: ]  action:r56  production:TERM -> FACTOR
+lexer: ]  action:r53  production:PLUSEX -> TERM
+lexer: ]  action:r46  production:COMP -> PLUSEX
+lexer: ]  action:r44  production:BNOT -> COMP
+lexer: ]  action:r42  production:BAND -> BNOT
+lexer: ]  action:r40  production:EXPRESSION -> BAND
+lexer:+  action:r67  production:ARRAY -> ARRAY [ EXPRESSION ]
+lexer:+  action:r62  production:FACTOR -> ARRAY
+lexer:+  action:r56  production:TERM -> FACTOR
+lexer: ;  action:r59  production:FACTOR -> NUM
+lexer: ;  action:r56  production:TERM -> FACTOR
+lexer: ;  action:r53  production:PLUSEX -> TERM
+lexer: ;  action:r54  production:PLUSEX -> TERM + PLUSEX
 lexer: ;  action:r46  production:COMP -> PLUSEX
 lexer: ;  action:r44  production:BNOT -> COMP
 lexer: ;  action:r42  production:BAND -> BNOT
 lexer: ;  action:r40  production:EXPRESSION -> BAND
-lexer: ;  action:r29  production:ASSIGNMENT -> ID ASSIGN EXPRESSION
-lexer:d  action:r28  production:SENTENCE -> ASSIGNMENT ;
-lexer:+  action:r54  production:FACTOR -> ID
-lexer:+  action:r50  production:TERM -> FACTOR
-lexer:;  action:r54  production:FACTOR -> ID
-lexer:;  action:r50  production:TERM -> FACTOR
-lexer:;  action:r48  production:PLUSEX -> TERM
-lexer:;  action:r49  production:PLUSEX -> TERM OP1 PLUSEX
+lexer: ;  action:r30  production:ASSIGNMENT -> ARRAY ASSIGN EXPRESSION
+lexer:a  action:r28  production:SENTENCE -> ASSIGNMENT ;
+lexer: ]  action:r59  production:FACTOR -> NUM
+lexer: ]  action:r56  production:TERM -> FACTOR
+lexer: ]  action:r53  production:PLUSEX -> TERM
+lexer: ]  action:r46  production:COMP -> PLUSEX
+lexer: ]  action:r44  production:BNOT -> COMP
+lexer: ]  action:r42  production:BAND -> BNOT
+lexer: ]  action:r40  production:EXPRESSION -> BAND
+lexer:[  action:r66  production:ARRAY -> ID [ EXPRESSION ]
+lexer: ]  action:r59  production:FACTOR -> NUM
+lexer: ]  action:r56  production:TERM -> FACTOR
+lexer: ]  action:r53  production:PLUSEX -> TERM
+lexer: ]  action:r46  production:COMP -> PLUSEX
+lexer: ]  action:r44  production:BNOT -> COMP
+lexer: ]  action:r42  production:BAND -> BNOT
+lexer: ]  action:r40  production:EXPRESSION -> BAND
+lexer:=  action:r67  production:ARRAY -> ARRAY [ EXPRESSION ]
+lexer: ]  action:r59  production:FACTOR -> NUM
+lexer: ]  action:r56  production:TERM -> FACTOR
+lexer: ]  action:r53  production:PLUSEX -> TERM
+lexer: ]  action:r46  production:COMP -> PLUSEX
+lexer: ]  action:r44  production:BNOT -> COMP
+lexer: ]  action:r42  production:BAND -> BNOT
+lexer: ]  action:r40  production:EXPRESSION -> BAND
+lexer:[  action:r66  production:ARRAY -> ID [ EXPRESSION ]
+lexer: ]  action:r59  production:FACTOR -> NUM
+lexer: ]  action:r56  production:TERM -> FACTOR
+lexer: ]  action:r53  production:PLUSEX -> TERM
+lexer: ]  action:r46  production:COMP -> PLUSEX
+lexer: ]  action:r44  production:BNOT -> COMP
+lexer: ]  action:r42  production:BAND -> BNOT
+lexer: ]  action:r40  production:EXPRESSION -> BAND
+lexer:+  action:r67  production:ARRAY -> ARRAY [ EXPRESSION ]
+lexer:+  action:r62  production:FACTOR -> ARRAY
+lexer:+  action:r56  production:TERM -> FACTOR
+lexer: ]  action:r59  production:FACTOR -> NUM
+lexer: ]  action:r56  production:TERM -> FACTOR
+lexer: ]  action:r53  production:PLUSEX -> TERM
+lexer: ]  action:r46  production:COMP -> PLUSEX
+lexer: ]  action:r44  production:BNOT -> COMP
+lexer: ]  action:r42  production:BAND -> BNOT
+lexer: ]  action:r40  production:EXPRESSION -> BAND
+lexer:[  action:r66  production:ARRAY -> ID [ EXPRESSION ]
+lexer: ]  action:r59  production:FACTOR -> NUM
+lexer: ]  action:r56  production:TERM -> FACTOR
+lexer: ]  action:r53  production:PLUSEX -> TERM
+lexer: ]  action:r46  production:COMP -> PLUSEX
+lexer: ]  action:r44  production:BNOT -> COMP
+lexer: ]  action:r42  production:BAND -> BNOT
+lexer: ]  action:r40  production:EXPRESSION -> BAND
+lexer:;  action:r67  production:ARRAY -> ARRAY [ EXPRESSION ]
+lexer:;  action:r62  production:FACTOR -> ARRAY
+lexer:;  action:r56  production:TERM -> FACTOR
+lexer:;  action:r53  production:PLUSEX -> TERM
+lexer:;  action:r54  production:PLUSEX -> TERM + PLUSEX
 lexer:;  action:r46  production:COMP -> PLUSEX
 lexer:;  action:r44  production:BNOT -> COMP
 lexer:;  action:r42  production:BAND -> BNOT
 lexer:;  action:r40  production:EXPRESSION -> BAND
-lexer:;  action:r29  production:ASSIGNMENT -> ID ASSIGN EXPRESSION
-lexer:e  action:r28  production:SENTENCE -> ASSIGNMENT ;
-lexer:,  action:r54  production:FACTOR -> ID
-lexer:,  action:r50  production:TERM -> FACTOR
-lexer:,  action:r48  production:PLUSEX -> TERM
+lexer:;  action:r30  production:ASSIGNMENT -> ARRAY ASSIGN EXPRESSION
+lexer:a  action:r28  production:SENTENCE -> ASSIGNMENT ;
+lexer: ]  action:r59  production:FACTOR -> NUM
+lexer: ]  action:r56  production:TERM -> FACTOR
+lexer: ]  action:r53  production:PLUSEX -> TERM
+lexer: ]  action:r46  production:COMP -> PLUSEX
+lexer: ]  action:r44  production:BNOT -> COMP
+lexer: ]  action:r42  production:BAND -> BNOT
+lexer: ]  action:r40  production:EXPRESSION -> BAND
+lexer:[  action:r66  production:ARRAY -> ID [ EXPRESSION ]
+lexer: ]  action:r59  production:FACTOR -> NUM
+lexer: ]  action:r56  production:TERM -> FACTOR
+lexer: ]  action:r53  production:PLUSEX -> TERM
+lexer: ]  action:r46  production:COMP -> PLUSEX
+lexer: ]  action:r44  production:BNOT -> COMP
+lexer: ]  action:r42  production:BAND -> BNOT
+lexer: ]  action:r40  production:EXPRESSION -> BAND
+lexer:=  action:r67  production:ARRAY -> ARRAY [ EXPRESSION ]
+lexer: ]  action:r59  production:FACTOR -> NUM
+lexer: ]  action:r56  production:TERM -> FACTOR
+lexer: ]  action:r53  production:PLUSEX -> TERM
+lexer: ]  action:r46  production:COMP -> PLUSEX
+lexer: ]  action:r44  production:BNOT -> COMP
+lexer: ]  action:r42  production:BAND -> BNOT
+lexer: ]  action:r40  production:EXPRESSION -> BAND
+lexer:[  action:r66  production:ARRAY -> ID [ EXPRESSION ]
+lexer: ]  action:r59  production:FACTOR -> NUM
+lexer: ]  action:r56  production:TERM -> FACTOR
+lexer: ]  action:r53  production:PLUSEX -> TERM
+lexer: ]  action:r46  production:COMP -> PLUSEX
+lexer: ]  action:r44  production:BNOT -> COMP
+lexer: ]  action:r42  production:BAND -> BNOT
+lexer: ]  action:r40  production:EXPRESSION -> BAND
+lexer:,  action:r67  production:ARRAY -> ARRAY [ EXPRESSION ]
+lexer:,  action:r62  production:FACTOR -> ARRAY
+lexer:,  action:r56  production:TERM -> FACTOR
+lexer:,  action:r53  production:PLUSEX -> TERM
 lexer:,  action:r46  production:COMP -> PLUSEX
 lexer:,  action:r44  production:BNOT -> COMP
 lexer:,  action:r42  production:BAND -> BNOT
 lexer:,  action:r40  production:EXPRESSION -> BAND
-lexer:,  action:r54  production:FACTOR -> ID
-lexer:,  action:r50  production:TERM -> FACTOR
-lexer:,  action:r48  production:PLUSEX -> TERM
+lexer: ]  action:r59  production:FACTOR -> NUM
+lexer: ]  action:r56  production:TERM -> FACTOR
+lexer: ]  action:r53  production:PLUSEX -> TERM
+lexer: ]  action:r46  production:COMP -> PLUSEX
+lexer: ]  action:r44  production:BNOT -> COMP
+lexer: ]  action:r42  production:BAND -> BNOT
+lexer: ]  action:r40  production:EXPRESSION -> BAND
+lexer:[  action:r66  production:ARRAY -> ID [ EXPRESSION ]
+lexer: ]  action:r59  production:FACTOR -> NUM
+lexer: ]  action:r56  production:TERM -> FACTOR
+lexer: ]  action:r53  production:PLUSEX -> TERM
+lexer: ]  action:r46  production:COMP -> PLUSEX
+lexer: ]  action:r44  production:BNOT -> COMP
+lexer: ]  action:r42  production:BAND -> BNOT
+lexer: ]  action:r40  production:EXPRESSION -> BAND
+lexer:,  action:r67  production:ARRAY -> ARRAY [ EXPRESSION ]
+lexer:,  action:r62  production:FACTOR -> ARRAY
+lexer:,  action:r56  production:TERM -> FACTOR
+lexer:,  action:r53  production:PLUSEX -> TERM
 lexer:,  action:r46  production:COMP -> PLUSEX
 lexer:,  action:r44  production:BNOT -> COMP
 lexer:,  action:r42  production:BAND -> BNOT
 lexer:,  action:r40  production:EXPRESSION -> BAND
-lexer:)  action:r54  production:FACTOR -> ID
-lexer:)  action:r50  production:TERM -> FACTOR
-lexer:)  action:r48  production:PLUSEX -> TERM
+lexer: ]  action:r59  production:FACTOR -> NUM
+lexer: ]  action:r56  production:TERM -> FACTOR
+lexer: ]  action:r53  production:PLUSEX -> TERM
+lexer: ]  action:r46  production:COMP -> PLUSEX
+lexer: ]  action:r44  production:BNOT -> COMP
+lexer: ]  action:r42  production:BAND -> BNOT
+lexer: ]  action:r40  production:EXPRESSION -> BAND
+lexer:[  action:r66  production:ARRAY -> ID [ EXPRESSION ]
+lexer: ]  action:r59  production:FACTOR -> NUM
+lexer: ]  action:r56  production:TERM -> FACTOR
+lexer: ]  action:r53  production:PLUSEX -> TERM
+lexer: ]  action:r46  production:COMP -> PLUSEX
+lexer: ]  action:r44  production:BNOT -> COMP
+lexer: ]  action:r42  production:BAND -> BNOT
+lexer: ]  action:r40  production:EXPRESSION -> BAND
+lexer:)  action:r67  production:ARRAY -> ARRAY [ EXPRESSION ]
+lexer:)  action:r62  production:FACTOR -> ARRAY
+lexer:)  action:r56  production:TERM -> FACTOR
+lexer:)  action:r53  production:PLUSEX -> TERM
 lexer:)  action:r46  production:COMP -> PLUSEX
 lexer:)  action:r44  production:BNOT -> COMP
 lexer:)  action:r42  production:BAND -> BNOT
 lexer:)  action:r40  production:EXPRESSION -> BAND
-lexer:)  action:r63  production:ACTUALPARAMLIST -> EXPRESSION
-lexer:)  action:r61  production:ACTUALPARAM -> ACTUALPARAMLIST
-lexer:)  action:r58  production:CALL -> ( ACTUALPARAM )
-lexer:)  action:r56  production:FACTOR -> ID CALL
-lexer:)  action:r50  production:TERM -> FACTOR
-lexer:)  action:r48  production:PLUSEX -> TERM
+lexer:)  action:r70  production:ACTUALPARAMLIST -> EXPRESSION
+lexer:)  action:r68  production:ACTUALPARAM -> ACTUALPARAMLIST
+lexer:)  action:r65  production:CALL -> ( ACTUALPARAM )
+lexer:)  action:r63  production:FACTOR -> ID CALL
+lexer:)  action:r56  production:TERM -> FACTOR
+lexer:)  action:r53  production:PLUSEX -> TERM
 lexer:)  action:r46  production:COMP -> PLUSEX
 lexer:)  action:r44  production:BNOT -> COMP
 lexer:)  action:r42  production:BAND -> BNOT
 lexer:)  action:r40  production:EXPRESSION -> BAND
-lexer:)  action:r63  production:ACTUALPARAMLIST -> EXPRESSION
-lexer:)  action:r64  production:ACTUALPARAMLIST -> EXPRESSION , ACTUALPARAMLIST
-lexer:)  action:r64  production:ACTUALPARAMLIST -> EXPRESSION , ACTUALPARAMLIST
-lexer:)  action:r61  production:ACTUALPARAM -> ACTUALPARAMLIST
-lexer:;  action:r58  production:CALL -> ( ACTUALPARAM )
-lexer:;  action:r56  production:FACTOR -> ID CALL
-lexer:;  action:r50  production:TERM -> FACTOR
-lexer:;  action:r48  production:PLUSEX -> TERM
+lexer:)  action:r70  production:ACTUALPARAMLIST -> EXPRESSION
+lexer:)  action:r71  production:ACTUALPARAMLIST -> EXPRESSION , ACTUALPARAMLIST
+lexer:)  action:r71  production:ACTUALPARAMLIST -> EXPRESSION , ACTUALPARAMLIST
+lexer:)  action:r68  production:ACTUALPARAM -> ACTUALPARAMLIST
+lexer:;  action:r65  production:CALL -> ( ACTUALPARAM )
+lexer:;  action:r63  production:FACTOR -> ID CALL
+lexer:;  action:r56  production:TERM -> FACTOR
+lexer:;  action:r53  production:PLUSEX -> TERM
 lexer:;  action:r46  production:COMP -> PLUSEX
 lexer:;  action:r44  production:BNOT -> COMP
 lexer:;  action:r42  production:BAND -> BNOT
 lexer:;  action:r40  production:EXPRESSION -> BAND
-lexer:;  action:r29  production:ASSIGNMENT -> ID ASSIGN EXPRESSION
+lexer:;  action:r30  production:ASSIGNMENT -> ARRAY ASSIGN EXPRESSION
 lexer:return  action:r28  production:SENTENCE -> ASSIGNMENT ;
 lexer:;  action:r32  production:RETSEN -> RET
 lexer:}  action:r27  production:SENTENCE -> RETSEN ;

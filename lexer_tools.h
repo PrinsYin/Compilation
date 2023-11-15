@@ -37,11 +37,13 @@ enum code {
     RR,        // 20 )
     LB,        // 21 {
     RB,        // 22 }
-    SEMI,      // 23 ;
-    COMMA,     // 24 ,
-    END,       // 25 #
-    NOTE,      // 26 ×¢ÊÍ
-    ERROR,     // 27 ´íÎó
+    LK,		// 23 [
+    RK,		// 24 ]
+    SEMI, 	// 25 ;
+    COMMA,    // 26 ,
+    END,       // 27 #
+    NOTE,      // 28 ×¢ÊÍ
+    ERROR,     // 29 ´íÎó
 };
 
 //´Ê·¨·ÖÎöÀà
@@ -94,21 +96,23 @@ class Lex {
             {ELSE, "ELSE"},
             {WHILE, "WHILE"},
             {RETURN, "RET"},
-            {PLUS, "OP1"},
-            {MIUS, "OP1"},
+            {PLUS, "+"},
+            {MIUS, "-"},
             {ASSIGN, "ASSIGN"},
-            {NEQ, "CMP"},
-            {EQ, "CMP"},
-            {LEQ, "CMP"},
-            {GEQ, "CMP"},
-            {GT, "CMP"},
-            {LT, "CMP"},
-            {MUL, "OP2"},
-            {DIV, "OP2"},
+            {NEQ, "!="},
+            {EQ, "=="},
+            {LEQ, "<="},
+            {GEQ, ">="},
+            {GT, ">"},
+            {LT, "<"},
+            {MUL, "*"},
+            {DIV, "/"},
             {LR, "("},
             {RR, ")"},
             {LB, "{"},
             {RB, "}"},
+            {LK, "["},
+            {RK, "]"},
             {SEMI, ";"},
             {COMMA, ","},
             {END, "END"},

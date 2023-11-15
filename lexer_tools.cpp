@@ -196,6 +196,16 @@ void Lex::scan(ifstream& fin, ofstream& fout)
                         token += src;
                         code = code::LB;
                     }
+                    else if (src == '[')
+                    {
+                        token += src;
+                        code = code::LK;
+                    }
+                    else if (src == ']')
+                    {
+                        token += src;
+                        code = code::RK;
+                    }
                     else if (src == '}')
                     {
                         token += src;
