@@ -93,7 +93,7 @@ class Lex {
             {IF, "IF"},
             {ELSE, "ELSE"},
             {WHILE, "WHILE"},
-            {RETURN, "RETURN"},
+            {RETURN, "RET"},
             {PLUS, "OP1"},
             {MIUS, "OP1"},
             {ASSIGN, "ASSIGN"},

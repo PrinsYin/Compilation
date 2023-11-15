@@ -370,159 +370,6 @@ void Parser::getGOTO()
 	}
 }
 
-/*enum c111 {
-	NUM = 0,//数值
-	ID,//标识符
-	INT,//int
-	VOID,//void
-	IF,//if
-	ELSE,//else
-	WHILE,//while
-	RETURN,//return
-	PLUS,//算符+
-	MIUS,//-
-	ASSIGN,//=
-	NEQ,//!=
-	EQ,//==
-	LEQ,//<=
-	GEQ,//>=
-	GT,//>
-	LT,//<
-	MUL,//*
-	DIV,//除号
-	LR,//(
-	RR,//)
-	LB,//{
-	RB,//}
-	SEMI,//;
-	COMMA,//,
-	END,//#
-	NOTE,//注释
-//};
-*/
-//他这个没有分成op，语法必须得扩充，也不能用op
-/*
-string Parser::tryParse(const string& LexResStr)
-{
-	L.lexerOpen(LexResStr);
-
-	 // 变量初始化
-		int line = 1;
-	vector<int> state;
-	vector<pair<string, int>> symbol;
-	pair<string, int> nextToken;
-	pair<string, int> token = L.lexerAnalyse();
-	pair<string, int> bubble = pair<string, int>(EPSILON, -1);
-	TreeNode* tp = nullptr;
-	stack<TreeNode*> treeNodeStack;
-	fstream fp("parser.txt", ios::out | ios::binary);
-	/// 初始压栈
-	state.push_back(0);
-	symbol.push_back(pair<string, int>(string("#"), -1));
-
-	/// 循环语法分析
-	while (token.first != "ERROR") {
-		//换行重读
-		if (token.first == "NL") {
-			line++;
-			token = L.lexerAnalyse();
-			continue;
-		}
-		//出错终止
-		if (find(VT.begin(), VT.end(), getEnumName[codefor(token.second)]) == VT.end()) {
-			string msg = string("ERROR: ") + getEnumName[codefor(token.second)] + string(" is not a terminator.\n");
-			fp << msg << endl;
-			fp.close();
-			return msg;
-		}
-
-		//动作状态机
-		string action = ACTION[{"I" + to_string(state.back()), int(token.second)}];
-		if (action == "acc") {
-			fp << "Accept!" << endl;
-			fp.close();
-			root = tp;
-			return "Accept!!!";
-		}
-		if (action == "error")
-		{
-			if (token != bubble) {
-				nextToken = token;
-				token = bubble;
-			}
-			else {
-				string msg;
-				msg = string("ERROR: Parser detected error on line ") + to_string(line) + string(" (") + getEnumName[codefor(token.second)] + string(").\n");
-				fp << msg << endl;
-				fp.close();
-				return msg;
-			}
-
-		}
-		if (action.substr(0, 1) == "s")  //移进
-		{
-			tp = new(nothrow)TreeNode;
-			if (!tp) {
-				string msg;
-				msg = string("ERROR: Memory crashed on line ") + to_string(line) + string(" (") + getEnumName[codefor(token.second)] + string(").\n");
-				fp << msg << endl;
-				fp.close();
-				return msg;
-			}
-			tp->data = {token.first,1};
-			treeNodeStack.push(tp);
-
-			//压栈
-			state.push_back(atoi(action.substr(1, action.length()).c_str()));
-			symbol.push_back(token);
-
-			if (token == bubble)
-				token = nextToken;
-			else
-				token = L.lexerAnalyse();
-
-		}
-		if (action.substr(0, 1) == "r")  //归约
-		{
-			int index = atoi(action.substr(1, action.length()).c_str());	//找到原文法中对应的索引
-			int length = rules[index].right.size();	//得到原文法右边有几个符号，后续需要将状态栈和符号栈出栈length个
-			for (int i = length-1; i >= 0; i--) {
-				if (symbol.back().first == rules[index].right[i]) {
-					symbol.pop_back();
-					state.pop_back();
-				}
-				else {
-					string msg;
-					msg = string("ERROR: Parser detected error on line ") + to_string(line) + string(" (") + getEnumName[codefor(token.second)] + string(").\n");
-					msg += string("-Note：") + symbol.back().first + string(" is different from ") + rules[index].right[i] + string(".\n");
-					fp << msg << endl;
-					fp.close();
-					return msg;
-				}
-			}
-
-
-
-
-			
-			symbol.push_back(pair<string, int>(rules[index].left, -1));
-			state.push_back(atoi(GOTO[{"I" + to_string(state.back()), symbol.back().first}].substr(1, GOTO[{"I" + to_string(state.back()), symbol.back().first}].length()).c_str()));
-
-		}
-		//保存一下 没有啥用
-		strState.clear();
-		strSymbol.clear();
-		strStack.clear();
-		for (int i = 0; i < state.size(); i++)
-			strState.push_back(to_string(state[i]));
-		for (int i = 0; i < symbol.size(); i++)
-			strSymbol.push_back(symbol[i].first);
-		strStack.push_back(getEnumName[codefor(token.second)]);
-
-		stackTable.push_back({ strState, strSymbol, strStack });
-	};
-	return "error";
-}*/
 
 string Parser::tryParse(const string& LexResStr, ifstream& fin, ofstream& fout)
 {
@@ -624,6 +471,28 @@ string Parser::tryParse(const string& LexResStr, ifstream& fin, ofstream& fout)
 					return msg;
 				}
 			}
+			/// 树
+			string token_t = rules[index].left + " ->";
+			for (int i = 0; i < length; i++) {
+					token_t += " " + rules[index].right[i];
+			}
+			fp << "lexer:" << token.first << "  action:" << action << "  production:" << token_t << endl;
+			tp = new(nothrow)TreeNode;
+			if (!tp) {
+				string msg;
+				msg = string("ERROR: Memory crashed on line ") + to_string(line) + string(" (") + token.first + string(").\n");
+				fp << msg << endl;
+				fp.close();
+				return msg;
+			}
+			tp->data = pair<string, int>(rules[index].left, -1);
+			for (int i = 0; i < length; i++) {
+				treeNodeStack.top()->parent = tp;
+				tp->children.push_back(treeNodeStack.top());
+				treeNodeStack.pop();
+			}
+			reverse(tp->children.begin(), tp->children.end());
+			treeNodeStack.push(tp);
 
 			symbol.push_back(pair<string, string>(rules[index].left, rules[index].left));
 			state.push_back(atoi(GOTO[{"I" + to_string(state.back()), symbol.back().second}].substr(1, GOTO[{"I" + to_string(state.back()), symbol.back().second}].length()).c_str()));
@@ -665,7 +534,7 @@ void Parser::GetTree(fstream &fp,TreeNode* p)
 
 void Parser::drawTree(TreeNode* root)
 {
-	fstream fp("tree.txt", ios::binary | ios::out);
+	fstream fp("tree", ios::binary | ios::out);
 	fp << "digraph g{" << endl;
 	fp << "splines = \"line\";\nnode[shape = record, height = .1]; " << endl;
 	TreeNode* p = root;

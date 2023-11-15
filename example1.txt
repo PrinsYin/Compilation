@@ -26,12 +26,17 @@ int demo(int a)
 	return b*2;
 }
 
+
 void main()
 {
-	int a[2][2];
-	a[0][0]=1;
-	a[0][1]=a[0][0]+1;
-    a[1][0]=a[0][0]+a[0][1];
-	a[1][1]=program(a[0][0],a[0][1],demo(a[1][0]));
+	int a;
+	int b;
+	int c;
+	int d;
+	int e;
+	b=1;
+	c=b+1;
+    	d=b+c;
+	e=program(b,c,demo(d));
 	return;
 }

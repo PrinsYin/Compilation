@@ -1,6 +1,6 @@
 
 #include "lexer_tools.h"
-
+#include<iostream>
 
 /**
  *
@@ -73,12 +73,26 @@ bool Lex::isKeyWord(string src, int& code)
  */
 pair<string, string> Lex::GetNextToken()
 {
+    string a;
+    /*
     if (index <=result.size())
     {
         pair<string, string> res = make_pair(result[index].first, string(getCodeName[code(result[index++].second)]));
-
+        if (res.second == "")
+        {
+            int b=code(result[index-1].second);
+            a = getCodeName[code(result[index-1].second)];
+            std::cout << a << b;
+        }
+          */
+    if (index < result.size())
+    {
+        pair<string, string> res = make_pair(result[index].first, string(getCodeName[code(result[index].second)]));
+        index++;
         return res;
-      }
+     }
+    else if (index ==result.size())
+        return make_pair("#", "#"); 
     else
         return make_pair("", "");
 }
@@ -124,6 +138,7 @@ void Lex::scan(ifstream& fin, ofstream& fout)
                 src = fin.get();
             }
             fin.seekg(-1, SEEK_CUR);
+            code = code::NUM;
             result.push_back(make_pair(token, code));
             fout << token << " " << code::NUM << endl;
             token = " ";
