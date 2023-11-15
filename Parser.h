@@ -7,10 +7,9 @@
 #include<sstream>
 #include<stack>
 #include<map>
-#include"dataDef.h"
+
 #include"lexer_tools.h"
 using namespace std;
-
 #define START "PROGRAM"
 #define EXT_CHAR "'"  //拓广文法加入的标记
 
@@ -26,9 +25,9 @@ public:
 	vector<Grammar> rules;//所有产生式
 	//vector<set<Project>>  lr1projects;  //SR(1)文法的所有项目
 	vector<set<Project>>  lr1states; //项目集规范族
-	map<pair<string, int>, string> GO;  //GO集合，例如GO(I0,1)=I2
-	map<pair<string, int>, string> GOTO;
-	map<pair<string, int>, string> ACTION;
+	map<pair<string, string>, string> GO;  //GO集合，例如GO(I0,1)=I2
+	map<pair<string, string>, string> GOTO;
+	map<pair<string, string>, string> ACTION;
 
 	set<string> getStrFIRST(const vector<string>& Ba);
 
@@ -56,6 +55,7 @@ public:
 	vector<string> strStack;    //输入串
 	vector<string> strState;    //状态栈
 	vector<string> strSymbol;   //符号栈
+	/*
 	enum codefor {
 		NUM = 0,//数值
 		ID,//标识符
@@ -86,6 +86,7 @@ public:
 		NOTE,//注释
 		NONE,//
 	};
+	
 	unordered_map<string, codefor> getEnum = {
 		{"NUM", NUM},
 		{"ID", ID},
@@ -145,7 +146,7 @@ public:
 	{END, "END"},
 	{NOTE, "NOTE"},
 	{NONE, "none"},
-	};
+	};*/
 
 	//Parser();
 	//~Parser();

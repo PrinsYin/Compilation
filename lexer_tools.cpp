@@ -71,12 +71,16 @@ bool Lex::isKeyWord(string src, int& code)
  *
  * @function 返回词法分析后代码的种别码和string
  */
-pair<string,int> Lex::GetNextToken()
+pair<string, string> Lex::GetNextToken()
 {
     if (index <=result.size())
-        return result[index++];
+    {
+        pair<string, string> res = make_pair(result[index].first, string(getCodeName[code(result[index++].second)]));
+
+        return res;
+      }
     else
-        return make_pair("",-1);
+        return make_pair("", "");
 }
 
 /**

@@ -7,7 +7,6 @@
 #include <stdlib.h> 
 #include<algorithm>
 #include"parser.h"
-#include"lexer_tools.h"
 using namespace std;
 
 
@@ -259,7 +258,7 @@ map <string, set<Project>> Parser::getLR1States()
 			{
 				if (!C_sup.count(_GO))
 				{
-					GO[{"I" + to_string(i), int(getEnum[vn])}] = "I" + to_string(num);
+					GO[{"I" + to_string(i), vn}] = "I" + to_string(num);
 					C.emplace_back(_GO);
 					C_sup.insert(_GO);
 					ProjectSet["I" + to_string(num++)] = _GO;
@@ -269,11 +268,11 @@ map <string, set<Project>> Parser::getLR1States()
 					vector<set<Project>>::iterator it = find(C.begin(), C.end(), _GO);
 					vector<set<Project>>::iterator begin = find(C.begin(), C.end(), C.front());
 					int index = it - begin;
-					GO[{"I" + to_string(i), int(getEnum[vn])}] = "I" + to_string(index);
+					GO[{"I" + to_string(i), vn}] = "I" + to_string(index);
 				}
 			}
 			else
-				GO[{"I" + to_string(i), int(getEnum[vn])}] = "error";
+				GO[{"I" + to_string(i), vn}] = "error";
 		}
 
 		for (auto& vt : VT)
@@ -296,7 +295,7 @@ map <string, set<Project>> Parser::getLR1States()
 			{
 				if (!C_sup.count(_GO))
 				{
-					GO[{"I" + to_string(i), int(getEnum[vt])}] = "I" + to_string(num);
+					GO[{"I" + to_string(i), vt}] = "I" + to_string(num);
 					C.emplace_back(_GO);
 					C_sup.insert(_GO);
 					ProjectSet["I" + to_string(num++)] = _GO;
@@ -306,11 +305,11 @@ map <string, set<Project>> Parser::getLR1States()
 					vector<set<Project>>::iterator it = find(C.begin(), C.end(), _GO);
 					vector<set<Project>>::iterator begin = find(C.begin(), C.end(), C.front());
 					int index = it - begin;
-					GO[{"I" + to_string(i), int(getEnum[vt])}] = "I" + to_string(index);
+					GO[{"I" + to_string(i), vt}] = "I" + to_string(index);
 				}
 			}
 			else
-				GO[{"I" + to_string(i), int(getEnum[vt])}] = "error";
+				GO[{"I" + to_string(i), vt}] = "error";
 		}
 	}
 	lr1states = C;
@@ -327,7 +326,7 @@ void Parser::getACTION()
 			//接受
 			if (rules[item.index].left == string(START) + EXT_CHAR && rules[item.index].right.front() == START && rules[item.index].right.size() == item.point)
 			{
-				ACTION[{"I" + to_string(i), END}] = "acc";
+				ACTION[{"I" + to_string(i), "#"}] = "acc";
 			}
 			//移进
 			else if (rules[item.index].right.size() > item.point)
@@ -335,10 +334,10 @@ void Parser::getACTION()
 				string var = rules[item.index].right[item.point];
 				if (VT.count(var))//是终结符
 				{
-					string tmp = GO[{"I" + to_string(i), int(getEnum[var])}];
+					string tmp = GO[{"I" + to_string(i), var}];
 					if (tmp != "error")
-						tmp = GO[{"I" + to_string(i), int(getEnum[var])}].substr(1, tmp.length());
-					ACTION[{"I" + to_string(i), int(getEnum[var])}] = string("s") + tmp;
+						tmp = GO[{"I" + to_string(i), var}].substr(1, tmp.length());
+					ACTION[{"I" + to_string(i), var}] = string("s") + tmp;
 				}
 			}
 			//规约
@@ -346,7 +345,7 @@ void Parser::getACTION()
 			{
 				for (auto fol : item.follow)
 				{
-					ACTION[{"I" + to_string(i), int(getEnum[fol])}] = string("r") + to_string(item.index);
+					ACTION[{"I" + to_string(i),fol}] = string("r") + to_string(item.index);
 				}
 			}
 		}
@@ -355,8 +354,8 @@ void Parser::getACTION()
 	for (int i = 0; i < lr1states.size(); i++)
 	{
 		for (auto vt : VT)
-			if (ACTION[{"I" + to_string(i), int(getEnum[vt]) }] == "")
-				ACTION[{"I" + to_string(i), int(getEnum[vt]) }] = "error";
+			if (ACTION[{"I" + to_string(i), vt}] == "")
+				ACTION[{"I" + to_string(i), vt}] = "error";
 	}
 }
 
@@ -366,7 +365,7 @@ void Parser::getGOTO()
 	{
 		for (int i = 0; i < lr1states.size(); i++)
 		{
-			GOTO[{"I" + to_string(i), int(getEnum[vn])}] = GO[{"I" + to_string(i), int(getEnum[vn])}];
+			GOTO[{"I" + to_string(i),vn}] = GO[{"I" + to_string(i), vn}];
 		}
 	}
 }
@@ -533,17 +532,18 @@ string Parser::tryParse(const string& LexResStr, ifstream& fin, ofstream& fout)
 	// 变量初始化
 	int line = 1;
 	vector<int> state;
-	vector<pair<string, int>> symbol;
-	pair<string, int> nextToken;
-	pair<string, int> token = L.GetNextToken();  // 获取第一个令牌
-	pair<string, int> bubble = pair<string, int>("none", NONE);
+	vector<pair<string, string>> symbol;
+	pair<string, string> nextToken;
+	pair<string, string> token = L.GetNextToken();  // 获取第一个令牌
+
+	pair<string, string> bubble = pair<string, string>("none", "none");
 	TreeNode* tp = nullptr;
 	stack<TreeNode*> treeNodeStack;
 	fstream fp("parser.txt", ios::out | ios::binary);
 
 	// 初始压栈
 	state.push_back(0);
-	symbol.push_back(pair<string, int>(string("#"), -1));
+	symbol.push_back(pair<string, string>(string("#"), string("#")));
 	// 循环语法分析
 	while (token.first != "ERROR") 
 	{
@@ -553,16 +553,16 @@ string Parser::tryParse(const string& LexResStr, ifstream& fin, ofstream& fout)
 			continue;
 		}
 
-		if (find(VT.begin(), VT.end(), getEnumName[codefor(token.second)]) == VT.end())//如果不是止符，报错
+		if (find(VT.begin(), VT.end(), token.second) == VT.end())//如果不是止符，报错
 		{
-			string msg = string("ERROR: ") + getEnumName[codefor(token.second)] + string(" is not a terminator.\n");
+			string msg = string("ERROR: ") + (token.second) + string(" is not a terminator.\n");
 			fp << msg << endl;
 			fp.close();
 			return msg;
 		}
 
 		// 动作状态机
-		string action = ACTION[{"I" + to_string(state.back()), int(token.second)}];
+		string action = ACTION[{"I" + to_string(state.back()), token.second}];
 		if (action == "acc") {  // 如果动作是“接受”，则接受输入并返回
 			fp << "Accept!" << endl;
 			fp.close();
@@ -579,7 +579,7 @@ string Parser::tryParse(const string& LexResStr, ifstream& fin, ofstream& fout)
 			else 
 			{
 				string msg;
-				msg = string("ERROR: Parser detected error on line ") + to_string(line) + string(" (") + getEnumName[codefor(token.second)] + string(").\n");
+				msg = string("ERROR: Parser detected error on line ") + to_string(line) + string(" (") + token.second + string(").\n");
 				fp << msg << endl;
 				fp.close();
 				return msg;
@@ -590,7 +590,7 @@ string Parser::tryParse(const string& LexResStr, ifstream& fin, ofstream& fout)
 			tp = new(nothrow)TreeNode;
 			if (!tp) {
 				string msg;
-				msg = string("ERROR: Memory crashed on line ") + to_string(line) + string(" (") + getEnumName[codefor(token.second)] + string(").\n");
+				msg = string("ERROR: Memory crashed on line ") + to_string(line) + string(" (") + token.second + string(").\n");
 				fp << msg << endl;
 				fp.close();
 				return msg;
@@ -611,27 +611,24 @@ string Parser::tryParse(const string& LexResStr, ifstream& fin, ofstream& fout)
 			int index = atoi(action.substr(1, action.length()).c_str());
 			int length = rules[index].right.size();
 			for (int i = length - 1; i >= 0; i--) {
-				if (symbol.back().first == rules[index].right[i]) {
+				if (symbol.back().second== rules[index].right[i]) {
 					symbol.pop_back();
 					state.pop_back();
 				}
 				else {
 					string msg;
-					msg = string("ERROR: Parser detected error on line ") + to_string(line) + string(" (") + getEnumName[codefor(token.second)] + string(").\n");
-					msg += string("-Note：") + symbol.back().first + string(" is different from ") + rules[index].right[i] + string(".\n");
+					msg = string("ERROR: Parser detected error on line ") + to_string(line) + string(" (") + token.second + string(").\n");
+					msg += string("-Note：") + symbol.back().second + string(" is different from ") + rules[index].right[i] + string(".\n");
 					fp << msg << endl;
 					fp.close();
 					return msg;
 				}
 			}
 
-			symbol.push_back(pair<string, int>(rules[index].left, -1));
-			cout<< GOTO[{"I" + to_string(state.back()), symbol.back().second}] << endl; 
-			cout<< to_string(state.back()) << endl; 
-			cout<<symbol.back().second<<endl;
+			symbol.push_back(pair<string, string>(rules[index].left, rules[index].left));
 			state.push_back(atoi(GOTO[{"I" + to_string(state.back()), symbol.back().second}].substr(1, GOTO[{"I" + to_string(state.back()), symbol.back().second}].length()).c_str()));
 		}
-
+		/*
 		// 保存状态，无实际功能，但可能用于调试或记录
 		strState.clear();
 		strSymbol.clear();
@@ -640,9 +637,9 @@ string Parser::tryParse(const string& LexResStr, ifstream& fin, ofstream& fout)
 			strState.push_back(to_string(state[i]));
 		for (int i = 0; i < symbol.size(); i++)
 			strSymbol.push_back(symbol[i].first);
-		strStack.push_back(getEnumName[codefor(token.second)]);
+		strStack.push_back(token.second);
 
-		stackTable.push_back({ strState, strSymbol, strStack });
+		stackTable.push_back({ strState, strSymbol, strStack });*/
 	};
 	return "error";
 }
