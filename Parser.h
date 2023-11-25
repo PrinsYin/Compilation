@@ -42,7 +42,7 @@ public:
 	void getACTION();
 	void drawTree(TreeNode* root);
 	void GetTree(fstream &fp,TreeNode* p);
-	string tryParse(const string& LexResStr, ifstream& fin, ofstream& fout);
+	string tryParse(const string& LexResStr, ifstream& fin, ofstream& fout,string code_file_name);
 
 
 	TreeNode* root;

@@ -425,4 +425,4 @@ lexer:#  action:r3  production:VARS -> VAR
 lexer:#  action:r4  production:VARS -> VAR VARS
 lexer:#  action:r4  production:VARS -> VAR VARS
 lexer:#  action:r1  production:PROGRAM -> M VARS
-Accept!
+词法 / 语法分析成功，语法树已输出到tree文件，graphviz格式

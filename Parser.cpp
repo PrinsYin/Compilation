@@ -9,6 +9,11 @@
 #include"parser.h"
 using namespace std;
 
+/**
+ * getStrFIRST 给定产生式右部的符号集合，返回它们的FIRST集。
+ * @param Ba 一个字符串向量，代表产生式右部的符号集合。
+ * @return 返回计算得到的FIRST集，它是一个字符串集合。
+ */
 
 set<string> Parser::getStrFIRST(const vector<string>& Ba)
 {
@@ -21,6 +26,10 @@ set<string> Parser::getStrFIRST(const vector<string>& Ba)
 		return FIRST[Ba[0]];
 }
 
+/**
+ * Parser 初始化解析器，并加载给定的文法文件。
+ * @param filename 文法文件的路径。
+ */
 Parser::Parser(const string& filename)
 {
 	errorLine = 0;
@@ -36,6 +45,11 @@ Parser::Parser(const string& filename)
 
 }
 
+/**
+ * loadGrammar 从给定的文件中加载文法。
+ * @param filename 文法文件的路径。
+ * @return 如果文件加载成功，则返回true，否则返回false。
+ */
 bool Parser::loadGrammar(const string& filename)
 {
 	// 打开文件
@@ -75,12 +89,19 @@ bool Parser::loadGrammar(const string& filename)
 }
 
 
+
+/**
+ * getVN 从给定的文法中获取所有的非终结符，并存储到VN集合中。
+ */
 void Parser::getVN()
 {
 	for (const auto& rule : rules)
 		VN.insert(rule.left);
 }
 
+/**
+ * getVT 从给定的文法中获取所有的终结符，并存储到VT集合中。
+ */
 void Parser::getVT()
 {
 	for (auto& rule : rules)
@@ -92,6 +113,9 @@ void Parser::getVT()
 	VT.insert("#");//空
 }
 
+/**
+ * getFIRST 计算和存储所有非终结符的FIRST集。
+ */
 void Parser::getFIRST()
 {
 	for (const auto& vt : VT) {
@@ -138,7 +162,13 @@ void Parser::getFIRST()
 			break;
 	}
 }
-///122 ppt
+
+/**
+ *getCLOSURE 根据给定的项目集I，计算它的闭包。
+ * @param I 项目集，它是一个Project类型的集合，Project可能是一个包含产生式索引、点的位置和follow set的结构体或类。
+ * @return 返回计算得到的闭包，它是一个Project类型的集合。
+ */
+
 set<Project> Parser::getCLOSURE(const set<Project>& I)
 {
 
@@ -219,8 +249,12 @@ set<Project> Parser::getCLOSURE(const set<Project>& I)
 	return closure;
 	
 }
-//124 GO(I X) CLOSURE(J)
-////项目集规范组
+
+
+/**
+ * getLR1States 计算LR(1)项目集的规范族。
+ * @return 返回一个映射，其中的键是各个项目集的名称，如"I0"、"I1"等，值是对应的项目集。
+ */
 map <string, set<Project>> Parser::getLR1States()
 {
 	set<string> tmp = { "#" };
@@ -317,6 +351,9 @@ map <string, set<Project>> Parser::getLR1States()
 }
 
 
+/**
+ * getACTION 构建LR(1)解析表的ACTION部分。在执行此函数后，解析器的ACTION表应为最新状态。
+ */
 void Parser::getACTION()
 {
 	for (int i = 0; i < lr1states.size(); i++)
@@ -359,6 +396,10 @@ void Parser::getACTION()
 	}
 }
 
+
+/**
+ * getGOTO 构建LR(1)解析表的GOTO部分。在执行此函数后，解析器的GOTO表应为最新状态。
+ */
 void Parser::getGOTO()
 {
 	for (auto vn : VN)
@@ -370,11 +411,19 @@ void Parser::getGOTO()
 	}
 }
 
+/**
+ * tryParse() 尝试解析给定的字符串。
+ *
+ * @param LexResStr 将要被解析的字符串。
+ * @param fin 文件流。
+ * @param fout 文件流。
+ * @return 如果解析成功，返回 "Accept!!!"；如果解析出错，返回错误信息。
+ */
 
-string Parser::tryParse(const string& LexResStr, ifstream& fin, ofstream& fout)
+string Parser::tryParse(const string& LexResStr, ifstream& fin, ofstream& fout,string code_file_name)
 {
 	
-	Lex L("example1.txt", "lexerout.txt");
+	Lex L(code_file_name, "lexerout.txt");
 	L.scan(fin,fout);  // 打开词法分析器，处理输入字符串
 	// 变量初始化
 	int line = 1;
@@ -411,7 +460,7 @@ string Parser::tryParse(const string& LexResStr, ifstream& fin, ofstream& fout)
 		// 动作状态机
 		string action = ACTION[{"I" + to_string(state.back()), token.second}];
 		if (action == "acc") {  // 如果动作是“接受”，则接受输入并返回
-			fp << "Accept!" << endl;
+			fp << "词法 / 语法分析成功，语法树已输出到tree文件，graphviz格式" << endl;
 			fp.close();
 			root = tp;
 			return "Accept!!!";
@@ -497,21 +546,18 @@ string Parser::tryParse(const string& LexResStr, ifstream& fin, ofstream& fout)
 			symbol.push_back(pair<string, string>(rules[index].left, rules[index].left));
 			state.push_back(atoi(GOTO[{"I" + to_string(state.back()), symbol.back().second}].substr(1, GOTO[{"I" + to_string(state.back()), symbol.back().second}].length()).c_str()));
 		}
-		/*
-		// 保存状态，无实际功能，但可能用于调试或记录
-		strState.clear();
-		strSymbol.clear();
-		strStack.clear();
-		for (int i = 0; i < state.size(); i++)
-			strState.push_back(to_string(state[i]));
-		for (int i = 0; i < symbol.size(); i++)
-			strSymbol.push_back(symbol[i].first);
-		strStack.push_back(token.second);
-
-		stackTable.push_back({ strState, strSymbol, strStack });*/
 	};
 	return "error";
 }
+
+
+
+/**
+ * GetTree() 递归地获取语法树的所有节点和边，存储在一个文件中。
+ *
+ * @param fp fstream类型的引用，表示用来存储生成的语法树的文件流。
+ * @param p TreeNode类型的指针，表示当前处理的节点。
+ */
 
 void Parser::GetTree(fstream &fp,TreeNode* p)
 {
@@ -532,9 +578,14 @@ void Parser::GetTree(fstream &fp,TreeNode* p)
 	}
 }
 
+/**
+ * drawTree() 使用Graphviz工具绘制语法树并保存到一个文件中。
+ *
+ * @param root TreeNode类型的指针，表示语法树的根节点。
+ */
 void Parser::drawTree(TreeNode* root)
 {
-	fstream fp("tree", ios::binary | ios::out);
+	fstream fp("tree.dot", ios::binary | ios::out);
 	fp << "digraph g{" << endl;
 	fp << "splines = \"line\";\nnode[shape = record, height = .1]; " << endl;
 	TreeNode* p = root;

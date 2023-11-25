@@ -1,14 +1,1 @@
-﻿  Parser.cpp
-C:\Users\19140\Desktop\compliermain\Compilation\Parser.cpp(108,28): warning C4244: “参数”: 从“__int64”转换到“_Ty”，可能丢失数据
-          with
-          [
-              _Ty=int
-          ]
-C:\Users\19140\Desktop\compliermain\Compilation\Parser.cpp(151,28): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
-C:\Users\19140\Desktop\compliermain\Compilation\Parser.cpp(212,27): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
-C:\Users\19140\Desktop\compliermain\Compilation\Parser.cpp(270,16): warning C4244: “初始化”: 从“__int64”转换到“int”，可能丢失数据
-C:\Users\19140\Desktop\compliermain\Compilation\Parser.cpp(307,16): warning C4244: “初始化”: 从“__int64”转换到“int”，可能丢失数据
-C:\Users\19140\Desktop\compliermain\Compilation\Parser.cpp(459,15): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-  lexer_tools.cpp
-  正在生成代码...
-  simplecomplier.vcxproj -> C:\Users\19140\Desktop\compliermain\Compilation\x64\Debug\simplecomplier.exe
+﻿  simplecomplier.vcxproj -> C:\Users\19140\Desktop\compliermain\Compilation\x64\Debug\simplecomplier.exe

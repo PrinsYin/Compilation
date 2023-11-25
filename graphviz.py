@@ -1,7 +1,7 @@
 from graphviz import Source
 
 # 读取文件
-with open('tree', 'r') as file:
+with open('tree.dot', 'r') as file:
     graph_data = file.read()
 
 # 创建图形

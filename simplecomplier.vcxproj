@@ -132,7 +132,6 @@
     <ClInclude Include="Parser.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="lexer.cpp" />
     <ClCompile Include="lexer_tools.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Parser.cpp" />

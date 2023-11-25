@@ -32,9 +32,6 @@
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="lexer.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="lexer_tools.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
