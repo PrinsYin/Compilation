@@ -37,6 +37,7 @@ std::string getFileName(const std::string& prompt, const std::string& default_fi
 
 int main()
 {
+    cout << "==============================\n       词法/语法分析器\n==============================\n";
     std::string grammar_file_name = getFileName("请输入语法文件名 (直接回车使用默认值 'grammar.txt'): ", "grammar.txt");
     std::string code_file_name = getFileName("请输入代码文件名 (直接回车使用默认值 'code.txt'): ", "code.txt");
     cout << "*******************\n";
